@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Football Jersey Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            background-color: #c20001;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .logo {
+            margin-right: 20px;
+        }
+
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            padding: 0;
+            display: flex;              
+            align-items: center;          
+        }
+        
+        .nav-links li {
+            margin: 0 20px; 
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+            transform: scale(1.1);
+            text-decoration: underline;
+        }
+
+        .navbar-icons {
+            display: flex;
+            align-items: center; 
+            margin-left: auto; 
+        }
+
+        .icon-container {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            cursor: pointer; /* Change cursor on hover */
+        }
+
+        .cart-icon, .login-icon {
+            font-size: 20px;
+            color: #fff;
+            transition: color 0.3s;
+            margin-right: 5px; /* Space between icons and count */
+        }
+        
+        .cart-icon:hover, .login-icon:hover {
+            color: #ffd700;
+        }
+
+        .cart-count {
+            color: white; 
+            font-weight: bold;
+            margin-right: 20px; /* Space before the login icon */
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three products in a row */
+            gap: 20px; 
+            margin: 20px; 
+        }
+
+        .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.03);
+        }
+
+        .product-image {
+            width: 100%; 
+            height: auto; 
+        }
+
+        .product-info {
+            padding: 15px;
+            text-align: center; 
+        }
+
+        .product-title {
+            font-size: 20px;
+            margin: 0 0 10px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #555;
+            margin: 0 0 10px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 15px;
+        }
+
+        .buy-button {
+            background-color: #c20001;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 auto;
+            display: block; 
+            transition: background-color 0.3s;
+        }
+
+        .buy-button:hover {
+            background-color: #a00000; 
+        }
+
+        .popup-invoice {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            width: 300px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .popup-invoice h3 {
+            margin-top: 0;
+        }
+
+        .popup-invoice ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .popup-invoice li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-popup {
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
+            float: right;
+        }
+
+        .remove-button {
+            background: transparent;
+            border: none;
+            color: red;
+            cursor: pointer;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .remove-button:hover {
+            text-decoration: underline;
+        }
+
+        .continue-button {
+            background-color: #c20001;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .continue-button:hover {
+            background-color: #a00000;
+        }
+
+
+ .logout-button {
+            background-color: #ff4d4d;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-left: 20px; 
+        }
+        .logout-button:hover  {
+            background-color: #cc0000;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="#">
+        <img src="../Other/365 Jerseys.png" alt="365 Jerseys" class="logo" height="110" width="120">
+    </a>
+    <div class="navbar-content">
+        <ul class="nav-links">
+            <li><a href="file:///C:/Users/beadl/OneDrive/Desktop/IA%202/html/Products%20page.html">Shop</a></li>
+            <li><a href="file:///C:/Users/beadl/OneDrive/Desktop/IA%202/html/About%20us.html">About Us</a></li>
+        </ul>
+    </div>
+    
+    <div class="navbar-icons">
+        <div class="icon-container" onclick="toggleInvoice()">
+            <i class="fas fa-shopping-cart cart-icon"></i>
+            <span id="cart-count" class="cart-count">0</span>
+        </div>
+      
+        <a href = "file:///C:/Users/beadl/OneDrive/Desktop/IA%202/html/Form21.html"><button class="logout-button" onclick="logout()">Logout</button> </a>
+    </div>
+</nav>
+
+<div class="product-grid">
+    <div class="product-card">
+        <img src="../Jerseys/Arsenal-Home-Football-Shirt-24-25.jpg" alt="Arsenal Home 2024" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Arsenal 2024/2025</h2>
+            <p class="product-description">Home Kit</p>
+            <p class="product-price">$7500.00</p>
+            <button class="buy-button" onclick="addToCart('Arsenal 2024/2025 Home Kit', 7500)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="../Jerseys/Arsenal-Away-Player-Football-Shirt-24-25.jpg" alt="Arsenal Away 2024/2025" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Arsenal 2024/2025</h2>
+            <p class="product-description">Away Kit</p>
+            <p class="product-price">$6500.00</p>
+            <button class="buy-button" onclick="addToCart('Arsenal 2024/2025 Away Kit', 6500)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="../Jerseys/Arsenal-Third-Player-Version-Football-Shirt-24-25.jpg" alt="Arsenal Third 2024/2025" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Arsenal 2024/2025</h2>
+            <p class="product-description">Third Kit</p>
+            <p class="product-price">$5000.00</p>
+            <button class="buy-button" onclick="addToCart('Arsenal 2024/2025 Third Kit', 5000)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="../Jerseys/Chelsea-Home-Player-Version-Football-Shirt-24-25.jpg" alt="Chelsea Home 2024/2025" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Chelsea 2024/2025</h2>
+            <p class="product-description">Home Kit</p>
+            <p class="product-price">$7500.00</p>
+            <button class="buy-button" onclick="addToCart('Chelsea 2024/2025 Home Kit', 7500)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="../Jerseys/Chelsea-Away-Player-Version-Football-Shirt-24-25.jpg" alt="Chelsea Away 2024/2025" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Chelsea 2024/2025</h2>
+            <p class="product-description">Away Kit</p>
+            <p class="product-price">$6500.00</p>
+            <button class="buy-button" onclick="addToCart('Chelsea 2024/2025 Away Kit', 6500)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="../Jerseys/Chelsea-Third-Football-Shirt-24-25.jpg" alt="Chelsea Third 2024/2025" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Chelsea 2024/2025</h2>
+            <p class="product-description">Third Kit</p>
+            <p class="product-price">$5000.00</p>
+            <button class="buy-button" onclick="addToCart('Chelsea 2024/2025 Third Kit', 5000)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="../Jerseys/Manchester-City-Home-Player-Version-Football-Shirt-24-25-1.jpg" alt="Manchester City Home 2024/2025" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Manchester City 2024/2025</h2>
+            <p class="product-description">Home Kit</p>
+            <p class="product-price">$7500.00</p>
+            <button class="buy-button" onclick="addToCart('Manchester City 2024/2025 Home Kit', 7500)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="../Jerseys/Manchester-City-Away-Player-Version-Football-Shirt-24-25.jpg" alt="Manchester City Away 2024/2025" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Manchester City 2024/2025</h2>
+            <p class="product-description">Away Kit</p>
+            <p class="product-price">$6500.00</p>
+            <button class="buy-button" onclick="addToCart('Manchester City 2024/2025 Away Kit', 6500)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="../Jerseys/Manchester-City-Third-Player-Version-Football-Shirt-24-25.jpg" alt="Manchester City Third 2024/2025" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Manchester City 2024/2025</h2>
+            <p class="product-description">Third Kit</p>
+            <p class="product-price">$5000.00</p>
+            <button class="buy-button" onclick="addToCart('Manchester City 2024/2025 Third Kit', 5000)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="../Jerseys/Manchester-United-Home-Player-Version-Football-Shirt-24-25.jpg" alt="Manchester United Home 2024/2025" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Manchester United 2024/2025</h2>
+            <p class="product-description">Home Kit</p>
+            <p class="product-price">$7500.00</p>
+            <button class="buy-button" onclick="addToCart('Manchester United 2024/2025 Home Kit', 7500)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="../Jerseys/Manchester-United-Away-Football-Shirt-24-25.jpg" alt="Manchester United Away 2024/2025" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Manchester United 2024/2025</h2>
+            <p class="product-description">Away Kit</p>
+            <p class="product-price">$6500.00</p>
+            <button class="buy-button" onclick="addToCart('Manchester United 2024/2025 Away Kit', 6500)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="../Jerseys/Manchester-United-Third-Football-Shirt-24-25.jpg" alt="Manchester United Third 2024/2025" class="product-image">
+        <div class="product-info">
+            <h2 class="product-title">Manchester United 2024/2025</h2>
+            <p class="product-description">Third Kit</p>
+            <p class="product-price">$5000.00</p>
+            <button class="buy-button" onclick="addToCart('Manchester United 2024/2025 Third Kit', 5000)">Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+<div class="popup-invoice" id="popup-invoice">
+    <span class="close-popup" onclick="toggleInvoice()">×</span>
+    <h3>Invoice</h3>
+    <ul id="invoice-list"></ul>
+    <strong>Total: $<span id="total-amount">0.00</span></strong>
+    <button class="continue-button" onclick="checkout()">Continue to Checkout</button>
+</div>
+
+<script>
+    let cart = [];
+    let totalAmount = 0;
+
+    function addToCart(item, price) {
+        cart.push({ item, price });
+        totalAmount += price;
+        document.getElementById('cart-count').textContent = cart.length; // Update cart count
+        updateInvoice();
+        document.getElementById('popup-invoice').style.display = 'block';
+    }
+
+    function removeFromCart(index) {
+        totalAmount -= cart[index].price;
+        cart.splice(index, 1);
+        document.getElementById('cart-count').textContent = cart.length; // Update cart count
+        updateInvoice();
+    }
+
+    function updateInvoice() {
+        const invoiceList = document.getElementById('invoice-list');
+        invoiceList.innerHTML = '';
+        cart.forEach((product, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `${product.item}: $${product.price.toFixed(2)} 
+                            <button class="remove-button" onclick="removeFromCart(${index})">Remove</button>`;
+            invoiceList.appendChild(li);
+        });
+        document.getElementById('total-amount').textContent = totalAmount.toFixed(2);
+    }
+
+    function toggleInvoice() {
+        const popup = document.getElementById('popup-invoice');
+        popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function checkout() {
+                // Redirect or perform checkout logic here
+        window.location.href = 'file:///C:/Users/beadl/OneDrive/Desktop/IA%202/html/Invoice.html';
+    }
+
+    // Initially hide the invoice
+    document.getElementById('popup-invoice').style.display = 'none';
+</script>
+
+</body>
+</html>

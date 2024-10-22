@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .stripe {
+            width: 50%;
+            background-color: #c20001; /* Red background */
+        }
+
+        .content {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f1faee; /* Light background */
+        }
+
+        .f_border {
+            border: none;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: center; /* Center text and logo */
+        }
+
+        h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        h5 {
+            margin: 0;
+            color: #666;
+        }
+
+        .login label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #e63946; /* Highlight border on focus */
+            outline: none;
+        }
+
+        .rem-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .log-button {
+            text-align: center;
+        }
+
+        button {
+            background-color: #e63946;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%; /* Full width for button */
+        }
+
+        button:hover {
+            background-color: #d62839; /* Darker red on hover */
+        }
+
+        /* Error message styles */
+        .error-message {
+            color: #e63946;
+            display: none; /* Hidden by default */
+            margin-top: 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .stripe, .content {
+                width: 100%; /* Full width on smaller screens */
+            }
+
+            .f_border {
+                padding: 20px; /* Adjust padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stripe"></div>
+    <div class="content">
+        <form id="loginForm">
+            <div class="f_border">
+                <center><img src="../Other/365 Jerseys.png" alt="365 Jerseys Logo" style=" height: 165px; width: 180px; margin-bottom: 3px;"></center>
+                <h2>Welcome Back</h2>
+                <h5>Please enter your details</h5>
+
+                <div class="login">
+                    <label for="username">Username</label> 
+                    <input type="text" name="username" id="username" required aria-label="Username">
+                </div>
+
+                <div class="login">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required aria-label="Password">
+                </div>
+
+                <div class="rem-me">
+                    <input type="checkbox" id="remember" name="remember" aria-label="Remember me">
+                    <label for="remember">Remember me</label>
+                </div>
+
+                <div class="log-button">
+                    <button type="submit">Login</button>
+                </div>
+                <p class="error-message" id="errorMessage">Invalid username or password.</p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const USERNAME = "hello123";
+        const PASSWORD = "password123"; // Minimum 8 characters
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Validate credentials
+            if (username === USERNAME && password === PASSWORD) {
+                window.location.href = "file:///C:/Users/beadl/OneDrive/Desktop/IA%202/html/Products%20page.html"; // Redirect to homepage 
+            } else {
+                errorMessage.style.display = 'block'; // Show error message
+            }
+        });
+    </script>
+</body>
+</html>
